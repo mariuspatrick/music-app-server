@@ -2,11 +2,11 @@ const SpotifyWebApi = require("spotify-web-api-node");
 const { Router } = require("express");
 
 const clientId = "87426b680b3e4eebbaa8c27fa17fa994",
-  clientSeret = "75fafc256c6849859e1b4f7a015cdcda";
+  clientSecret = "75fafc256c6849859e1b4f7a015cdcda";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: clientId,
-  clientSecret: clientSeret
+  clientSecret: clientSecret
 });
 
 const router = new Router();
@@ -17,7 +17,7 @@ router.get("/albums", async (req, res) => {
     const response = await spotifyApi.getArtistAlbums(
       "43ZHCT0cAZBISjO8DG9PnE",
       {
-        limit: 10,
+        limit: 15,
         offset: 20
       }
     );
@@ -30,9 +30,66 @@ router.get("/albums", async (req, res) => {
 router.get("/genres", async (req, res) => {
   try {
     await authenticate();
-    const response = await "https://api.spotify.com/v1/browse/categories";
+    console.log("Getting query params", req.query);
+    const genre = req.query.genre;
+    const songs = await spotifyApi.getPlaylistsForCategory(genre, {
+      country: "GB",
+      limit: 5,
+      offset: 0
+    });
+    res.send(songs);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
-    res.send(response);
+// router.get("/categories", async (req, res) => {
+//   try {
+//     await authenticate();
+//     const category = await spotifyApi.getCategory("rock", {
+//       country: "NL",
+//       locale: "sv_SE"
+//     });
+//     res.send(category);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// });
+
+router.get("/genres/:playlistId", async (req, res) => {
+  try {
+    await authenticate();
+    const playlistId = req.params.playlistId;
+    const playlist = await spotifyApi.getPlaylist(playlistId, {
+      limit: 5,
+      offset: 0
+    });
+    res.send(playlist.body);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// spotifyApi.getCategories({
+//   limit : 5,
+//   offset: 0,
+//   country: 'SE',
+//   locale: 'sv_SE'
+// })
+// .then(function(data) {
+// console.log(data.body);
+// }, function(err) {
+// console.log("Something went wrong!", err);
+// });
+
+router.get("/", async (req, res) => {
+  try {
+    await authenticate();
+    const tracks = await spotifyApi.getArtistTopTracks(
+      "0oSGxfWSnnOXhD2fKuz2Gy",
+      "GB"
+    );
+    res.send(tracks);
   } catch (err) {
     console.error(err);
   }
@@ -49,7 +106,5 @@ const authenticate = async () => {
     console.error(err);
   }
 };
-
-// authenticate();
 
 module.exports = router;

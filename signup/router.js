@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { toJWT } = require("./jwt");
+const { login } = require("../login/router");
 const bcrypt = require("bcrypt");
 const User = require("./model");
 
@@ -18,11 +18,7 @@ router.post("/signup", (req, res, next) => {
       });
     } else {
       User.create(user)
-        .then(user => {
-          const jwt = toJWT({ userId: user.id });
-          res.json({ jwt, name: user.name, email: user.email });
-        })
-        // .then(user => login(res, next, user.email, req.body.password))
+        .then(user => login(res, next, user.name, req.body.password))
         .catch(err => next(err));
     }
   });
