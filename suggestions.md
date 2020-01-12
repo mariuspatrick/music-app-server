@@ -27,3 +27,11 @@ Search -> Find song -> Select song -> Save to "playlist"
 - Get data back from backend (after you posted something)
 - Put in redux
 - Make a UI component to display what the use has selected / Saved
+
+SUNDAY TASKs:
+
+1. Be able to get userId for user_playlists
+
+   - Make auth middleware and use it with post routers
+
+2.

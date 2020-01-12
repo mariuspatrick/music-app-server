@@ -6,10 +6,10 @@ const Playlist = db.define("playlist", {
   name: {
     type: Sequelize.STRING,
     alloNull: false
+  },
+  trackId: {
+    type: Sequelize.STRING
   }
 });
-
-Playlist.belongsTo(User);
-User.hasMany(Playlist);
 
 module.exports = Playlist;

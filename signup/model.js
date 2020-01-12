@@ -13,15 +13,6 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  main_genre: {
-    type: Sequelize.STRING
-  },
-  genres: {
-    type: Sequelize.STRING
-  },
-  artists: {
-    type: Sequelize.STRING
   }
 });
 
