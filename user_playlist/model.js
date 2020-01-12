@@ -5,9 +5,6 @@ const User = require("../signup/model");
 const User_playlist = db.define("user_playlist", {
   name: {
     type: Sequelize.STRING
-  },
-  playlist_id: {
-    type: Sequelize.INTEGER
   }
 });
 

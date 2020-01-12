@@ -36,6 +36,8 @@ SUNDAY TASKs:
 
 2. Connect user_playlist with playlist
 
+   - Be able to add tracks to a playlist
+
 3. Use tracks??
 
    - See how to connect tracks and playlist
