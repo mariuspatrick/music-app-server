@@ -2,9 +2,9 @@ const express = require("express");
 const spotifyRouter = require("./spotify");
 const signup = require("./signup/router");
 const { router: loginRouter } = require("./login/router");
-const Song = require("./tracks/model");
 const songRouter = require("./tracks/router");
 const routerUserPlaylist = require("./user_playlist/router");
+const playlistRouter = require("./playlist/router");
 
 const cors = require("cors");
 
@@ -20,5 +20,6 @@ app.use(signup);
 app.use(loginRouter);
 app.use(songRouter);
 app.use(routerUserPlaylist);
+app.use(playlistRouter);
 
 app.listen(port, console.log(`Listening on port: ${port}`));

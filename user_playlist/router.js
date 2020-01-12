@@ -13,14 +13,25 @@ router.get("/playlist/:playlistId", async (req, res) => {
   }
 });
 
+createPlaylistId = playlist => {
+  const id = Math.random() * 1000;
+  if (id !== playlist.id) {
+    return (playlist.playlistId = Math.round(id));
+  } else {
+    return;
+  }
+};
+
 router.post("/playlist", authMiddleware, async (req, res) => {
   try {
     const { user } = req;
     userPlaylist = req.body;
     userPlaylist.userId = user.id;
-    console.log("request playlist post");
-    //const name = "testName";
+
+    createPlaylistId(userPlaylist);
+
     const entity = await User_playlist.create(userPlaylist);
+
     console.log("entity", entity);
     res.send(entity);
   } catch (err) {
