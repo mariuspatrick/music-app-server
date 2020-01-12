@@ -4,23 +4,23 @@ const authMiddleware = require("../login/auth");
 
 const router = new Router();
 
-router.get("/playlist/:playlistId", async (req, res) => {
-  try {
-    console.log("todo");
-    res.send({ todo: "text" });
-  } catch (err) {
-    console.error(err);
-  }
-});
+// router.get("/playlist/:playlistId", async (req, res) => {
+//   try {
+//     console.log("todo");
+//     res.send({ todo: "text" });
+//   } catch (err) {
+//     console.error(err);
+//   }
+// });
 
-createPlaylistId = playlist => {
-  const id = Math.random() * 1000;
-  if (id !== playlist.id) {
-    return (playlist.playlistId = Math.round(id));
-  } else {
-    return;
-  }
-};
+// createPlaylistId = playlist => {
+//   const id = Math.random() * 1000;
+//   if (id !== playlist.id) {
+//     return (playlist.playlistId = Math.round(id));
+//   } else {
+//     return;
+//   }
+// };
 
 router.post("/playlist", authMiddleware, async (req, res) => {
   try {
@@ -28,7 +28,7 @@ router.post("/playlist", authMiddleware, async (req, res) => {
     userPlaylist = req.body;
     userPlaylist.userId = user.id;
 
-    createPlaylistId(userPlaylist);
+    // createPlaylistId(userPlaylist);
 
     const entity = await User_playlist.create(userPlaylist);
 
