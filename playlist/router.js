@@ -46,7 +46,6 @@ router.delete("/event/:playlistId", async (req, res, next) => {
     const entity = await Playlist.destroy({
       where: { id: req.params.playlistId }
     });
-    // .then(number => response.send({ number }))
     res.send(entity);
   } catch (err) {
     console.error(err);

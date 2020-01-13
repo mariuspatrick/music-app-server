@@ -3,7 +3,7 @@ const Song = require("./model");
 
 const router = new Router();
 
-router.post("/track/:playlistId", async (req, res) => {
+router.post("/playlist/:playlistId/:trackId", async (req, res) => {
   console.log("got here??");
 
   try {

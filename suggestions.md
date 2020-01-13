@@ -34,10 +34,10 @@ SUNDAY TASKs:
 
    - Use auth middleware with post routers // Done
 
-2. Connect user_playlist with playlist
+2. Connect user_playlist with playlist // Done
 
-   - Be able to add tracks to a playlist
+   - Be able to add tracks to a playlist // Done
 
-3. Use tracks??
+3. Use tracks?? // still ??
 
    - See how to connect tracks and playlist
