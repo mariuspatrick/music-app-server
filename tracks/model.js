@@ -1,20 +1,22 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
-const Playlist = require("../playlist/model");
+const Playlist = require("../playlists/model");
 
-const Track = db.define("track", {
-  trackId: {
-    type: Sequelize.STRING
-  },
+const Tracks = db.define("track", {
   track_title: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    alloNull: false
+  },
+  trackId: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   artist: {
     type: Sequelize.STRING
   }
 });
 
-Track.belongsTo(Playlist);
-Playlist.hasMany(Track);
+Tracks.belongsTo(Playlist);
+Playlist.hasMany(Tracks);
 
-module.exports = Track;
+module.exports = Tracks;

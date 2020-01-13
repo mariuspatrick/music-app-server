@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const User_playlist = require("./model");
+const Playlist = require("./model");
 const authMiddleware = require("../login/auth");
 
 const router = new Router();
@@ -30,7 +30,7 @@ router.post("/playlist", authMiddleware, async (req, res) => {
 
     // createPlaylistId(userPlaylist);
 
-    const entity = await User_playlist.create(userPlaylist);
+    const entity = await Playlist.create(userPlaylist);
 
     console.log("entity", entity);
     res.send(entity);

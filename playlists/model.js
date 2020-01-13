@@ -2,13 +2,13 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const User = require("../signup/model");
 
-const User_playlist = db.define("user_playlist", {
+const Playlist = db.define("playlist", {
   name: {
     type: Sequelize.STRING
   }
 });
 
-User_playlist.belongsTo(User);
-User.hasMany(User_playlist);
+Playlist.belongsTo(User);
+User.hasMany(Playlist);
 
-module.exports = User_playlist;
+module.exports = Playlist;
