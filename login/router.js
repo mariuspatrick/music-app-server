@@ -4,13 +4,13 @@ const User = require("../signup/model");
 const bcrypt = require("bcrypt");
 // const auth = require("./auth");
 
-function login(res, next, name = null, password = null) {
-  if (!name || !password) {
+function login(res, next, email = null, password = null) {
+  if (!email || !password) {
     res.status(400).send({
-      message: "Please supply a valid name and password"
+      message: "Please supply a valid email and password"
     });
   } else {
-    User.findOne({ where: { name: name } })
+    User.findOne({ where: { email: email } })
       .then(user => {
         if (!user) {
           res.status(400).send({
@@ -37,11 +37,10 @@ function login(res, next, name = null, password = null) {
 const router = new Router();
 
 router.post("/login", (req, res, next) => {
-  const name = req.body.name;
+  const email = req.body.email;
   const password = req.body.password;
-  console.log("name in login router", name);
 
-  login(res, next, name, password);
+  login(res, next, email, password);
 });
 
 // router.get("/secret", auth, (req, res) => {
