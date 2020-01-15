@@ -4,7 +4,7 @@ const Tracks = require("./model");
 
 const router = new Router();
 
-router.get("/playlist/:playlistId", async (req, res) => {
+router.get("/tracks/:playlistId", async (req, res) => {
   try {
     const entity = await Tracks.findAll({
       where: {
@@ -17,7 +17,7 @@ router.get("/playlist/:playlistId", async (req, res) => {
   }
 });
 
-router.post("/playlist/:playlistId", async (req, res) => {
+router.post("/tracks/:playlistId", async (req, res) => {
   try {
     playlistTracks = req.body;
     playlistTracks.playlistId = req.params.playlistId;
@@ -41,7 +41,7 @@ router.post("/playlist/:playlistId", async (req, res) => {
 //   }
 // });
 
-router.delete("/event/:playlistId", async (req, res, next) => {
+router.delete("/playlist/:playlistId", async (req, res, next) => {
   try {
     const entity = await Tracks.destroy({
       where: { id: req.params.playlistId }
