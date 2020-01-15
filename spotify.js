@@ -59,7 +59,8 @@ router.get("/genres", async (req, res) => {
 router.get("/genres/:playlistId", async (req, res) => {
   try {
     await authenticate();
-    const playlistId = req.params.playlistId;
+    playlistId = req.params.playlistId;
+    console.log("req.params: ", req.params);
     const playlist = await spotifyApi.getPlaylist(playlistId, {
       limit: 5,
       offset: 0
