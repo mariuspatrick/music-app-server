@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const Tracks = require("./model");
-// const authMiddleware = require("../login/auth");
+const authMiddleware = require("../login/auth");
+const Playlist = require("../playlists/model");
 
 const router = new Router();
 
@@ -17,10 +18,24 @@ router.get("/tracks/:playlistId", async (req, res) => {
   }
 });
 
-router.post("/tracks/:playlistId", async (req, res) => {
+router.post("/tracks/:playlistId", authMiddleware, async (req, res) => {
   try {
+    const { user } = req;
+
+    const playlist = await Playlist.findOne({
+      where: { userId: user.id }
+    });
+
+    const playlistId = playlist.dataValues.userId;
+
+    console.log("playlist", playlist.dataValues.userId);
+
     playlistTracks = req.body;
-    playlistTracks.playlistId = req.params.playlistId;
+
+    playlistTracks.playlistId = playlistId;
+
+    req.params.playlistId = playlistId;
+
     console.log("req.params.id in playlist router: ", req.params.playlistId);
     const entity = await Tracks.create(playlistTracks);
     res.send(entity);
