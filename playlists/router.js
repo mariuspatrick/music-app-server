@@ -7,12 +7,14 @@ const router = new Router();
 router.get("/playlist", authMiddleware, async (req, res) => {
   try {
     const { user } = req;
-    userPlaylist = req.body;
 
-    if (user.id === userPlaylist.userId) {
-      const entity = await Playlist.findAll();
-      res.send(entity);
-    }
+    const entity = await Playlist.findAll({
+      where: {
+        userId: user.id
+      }
+    });
+
+    res.send(entity);
   } catch (err) {
     console.error(err);
   }
@@ -34,11 +36,8 @@ router.post("/playlist", authMiddleware, async (req, res) => {
     userPlaylist = req.body;
     userPlaylist.userId = user.id;
 
-    // createPlaylistId(userPlaylist);
-
     const entity = await Playlist.create(userPlaylist);
 
-    console.log("entity", entity);
     res.send(entity);
   } catch (err) {
     console.error(err);
