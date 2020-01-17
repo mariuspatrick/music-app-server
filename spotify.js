@@ -43,23 +43,11 @@ router.get("/genres", async (req, res) => {
   }
 });
 
-// router.get("/categories", async (req, res) => {
-//   try {
-//     await authenticate();
-//     const category = await spotifyApi.getCategory("rock", {
-//       country: "NL",
-//       locale: "sv_SE"
-//     });
-//     res.send(category);
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
-
 router.get("/genres/:playlistId", async (req, res) => {
   try {
     await authenticate();
-    const playlistId = req.params.playlistId;
+    playlistId = req.params.playlistId;
+    console.log("req.params: ", req.params);
     const playlist = await spotifyApi.getPlaylist(playlistId, {
       limit: 5,
       offset: 0
@@ -69,18 +57,6 @@ router.get("/genres/:playlistId", async (req, res) => {
     console.error(err);
   }
 });
-
-// spotifyApi.getCategories({
-//   limit : 5,
-//   offset: 0,
-//   country: 'SE',
-//   locale: 'sv_SE'
-// })
-// .then(function(data) {
-// console.log(data.body);
-// }, function(err) {
-// console.log("Something went wrong!", err);
-// });
 
 router.get("/", async (req, res) => {
   try {

@@ -1,22 +1,67 @@
 const { Router } = require("express");
-const Song = require("./model");
+const Tracks = require("./model");
+const authMiddleware = require("../login/auth");
+const Playlist = require("../playlists/model");
 
 const router = new Router();
 
-router.post("/track/:playlistId", async (req, res) => {
-  console.log("got here??");
-
+router.get("/tracks", async (req, res) => {
   try {
-    // const song = req.body;
-    // first check if songid is there,
-    // if songid is there, check if songid is already in tracks table if not add (one sql command insert of update )
-    // check if playlist isn't new for this user.
-    // add trackid to playlist model (track id and playlist id )
-    // send a response to this request to user with {status: "ok"} or {status: "playlist created "}
-    // song.track_title = track_title;
-    const playlistItem = await Song.create(req.body);
-    // console.log("song", song);
-    res.send(song);
+    const entity = await Tracks.findAll({
+      where: {
+        userPlaylistId: req.params.playlistId
+      }
+    });
+    res.send(entity);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.post("/tracks", authMiddleware, async (req, res) => {
+  try {
+    const { user } = req;
+
+    const playlist = await Playlist.findOne({
+      where: { userId: user.id }
+    });
+
+    const playlistId = playlist.dataValues.userId;
+
+    console.log("playlist", playlist.dataValues.userId);
+
+    playlistTracks = req.body;
+
+    playlistTracks.playlistId = playlistId;
+
+    // req.params.playlistId = playlistId;
+
+    // console.log("req.params.id in playlist router: ", req.params.playlistId);
+    const entity = await Tracks.create(playlistTracks);
+    res.send(entity);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// router.put("/playlist/:playlistId", async (req, res, next) => {
+//   try {
+//     const entity = await Playlist.findByPk(req.params.id)
+//       .then(event => event.update(req.body))
+//       .then(event => res.send(event))
+//       .catch(next);
+
+//   } catch(err) {
+//     console.error(err)
+//   }
+// });
+
+router.delete("/playlist/:playlistId", async (req, res, next) => {
+  try {
+    const entity = await Tracks.destroy({
+      where: { id: req.params.playlistId }
+    });
+    res.send(entity);
   } catch (err) {
     console.error(err);
   }

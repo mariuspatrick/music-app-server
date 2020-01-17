@@ -30,8 +30,14 @@ Search -> Find song -> Select song -> Save to "playlist"
 
 SUNDAY TASKs:
 
-1. Be able to get userId for user_playlists
+1. Be able to get userId for user_playlists // Done
 
-   - Make auth middleware and use it with post routers
+   - Use auth middleware with post routers // Done
 
-2.
+2. Connect user_playlist with playlist // Done
+
+   - Be able to add tracks to a playlist // Done
+
+3. Use tracks?? // still ??
+
+   - See how to connect tracks and playlist
