@@ -2,14 +2,16 @@
 
 1. After you've pulled from github:
 
-   -run npm install
+   - inside your project folder
 
-   -check if all dependencies have been installed by running node index.js
+   - run npm install
+
+   - check if all dependencies have been installed by running node index.js
 
    - optional: install missing dependencies
 
    - to remove everything from database:
-     in db.js file set force: true (don't forget to set back to false)
+     in db.js file, set force: true (don't forget to set back to false)
 
 2. To run:
 
