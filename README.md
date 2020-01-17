@@ -3,7 +3,8 @@
 1. After you've pulled from github:
 
    -run npm install
-   -check if all dependencies have been installed
+
+   -check if all dependencies have been installed by running node index.js
 
    - optional: install missing dependencies
 
@@ -14,13 +15,15 @@
 
    - run node index.js
 
-   or if you don't want to restart everytime
+   or if you don't want to restart the server after every change
 
    -run npx nodemon
 
 3. To deploy to heroku:
 
    - git push heroku master
-   - heroku open
 
-4. To
+     \*if working on a different branch:
+     -git push heroku <yourbranch>:master
+
+   - heroku open to run
