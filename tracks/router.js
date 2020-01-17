@@ -5,7 +5,7 @@ const Playlist = require("../playlists/model");
 
 const router = new Router();
 
-router.get("/tracks/:playlistId", async (req, res) => {
+router.get("/tracks", async (req, res) => {
   try {
     const entity = await Tracks.findAll({
       where: {
@@ -18,7 +18,7 @@ router.get("/tracks/:playlistId", async (req, res) => {
   }
 });
 
-router.post("/tracks/:playlistId", authMiddleware, async (req, res) => {
+router.post("/tracks", authMiddleware, async (req, res) => {
   try {
     const { user } = req;
 
@@ -34,9 +34,9 @@ router.post("/tracks/:playlistId", authMiddleware, async (req, res) => {
 
     playlistTracks.playlistId = playlistId;
 
-    req.params.playlistId = playlistId;
+    // req.params.playlistId = playlistId;
 
-    console.log("req.params.id in playlist router: ", req.params.playlistId);
+    // console.log("req.params.id in playlist router: ", req.params.playlistId);
     const entity = await Tracks.create(playlistTracks);
     res.send(entity);
   } catch (err) {
