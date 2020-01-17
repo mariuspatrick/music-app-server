@@ -20,15 +20,6 @@ router.get("/playlist", authMiddleware, async (req, res) => {
   }
 });
 
-// createPlaylistId = playlist => {
-//   const id = Math.random() * 1000;
-//   if (id !== playlist.id) {
-//     return (playlist.playlistId = Math.round(id));
-//   } else {
-//     return;
-//   }
-// };
-
 router.post("/playlist", authMiddleware, async (req, res) => {
   try {
     const { user } = req;
