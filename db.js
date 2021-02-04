@@ -1,7 +1,9 @@
 const Sequelize = require("sequelize");
+const { dbPassword, dbPort } = require('./config');
+
 const databaseUrl =
   process.env.DATABASE_URL ||
-  "postgres://postgres:***REMOVED***@localhost:5420/postgres";
+  `postgres://postgres:${dbPassword}@localhost:${dbPort}/postgres`;
 
 const db = new Sequelize(databaseUrl);
 
