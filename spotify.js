@@ -1,10 +1,10 @@
 const SpotifyWebApi = require("spotify-web-api-node");
 const { Router } = require("express");
 
-const { ***REMOVED***, clientSecret } = require('./config');
+const { clientId, clientSecret } = require('./config');
 
 const spotifyApi = new SpotifyWebApi({
-  ***REMOVED***: ***REMOVED***,
+  clientId: clientId,
   clientSecret: clientSecret
 });
 
